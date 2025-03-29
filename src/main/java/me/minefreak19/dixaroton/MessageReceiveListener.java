@@ -1,4 +1,4 @@
-package me.minefreak19;
+package me.minefreak19.dixaroton;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;

@@ -1,4 +1,4 @@
-package me.minefreak19;
+package me.minefreak19.dixaroton;
 
 import com.exaroton.api.ExarotonClient;
 import net.dv8tion.jda.api.JDA;

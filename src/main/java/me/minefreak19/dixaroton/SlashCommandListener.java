@@ -1,4 +1,4 @@
-package me.minefreak19;
+package me.minefreak19.dixaroton;
 
 import com.exaroton.api.server.Server;
 import com.exaroton.api.server.ServerStatus;
