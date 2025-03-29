@@ -8,7 +8,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class SlashCommandListener extends ListenerAdapter {
     @Override
@@ -37,7 +36,14 @@ public class SlashCommandListener extends ListenerAdapter {
                         default -> "🟡";
                     };
 
-                    content.append(String.format("\n## %s `%s` (%s)", statusEmoji, server.getName(), statusText));
+                    content.append(String.format("\n## %s `%s`: %s", statusEmoji, server.getName(), statusText));
+                    if (server.getStatus() == ServerStatus.ONLINE) {
+                        content.append(String.format(" (%d/%d)", server.getPlayerInfo().getCount(), server.getPlayerInfo().getMax()));
+                        System.out.println(server.getPlayerInfo().getList());
+                        for (String name : server.getPlayerInfo().getList()) {
+                            content.append("\n\t").append(name);
+                        }
+                    }
                 }
                 event.replyEmbeds(new EmbedBuilder()
                                 .setDescription(content.toString().trim())
