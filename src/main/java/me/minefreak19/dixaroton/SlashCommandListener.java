@@ -14,7 +14,6 @@ public class SlashCommandListener extends ListenerAdapter {
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         // TODO: Add a central Listener in the main class for server events and maintain server status and player list in a cache for this response
         // TODO: Implement a persistent message published in a set channel which is updated upon receiving a new status, rather than through a command
-        // TODO: Add communication link between a set Discord channel and Minecraft chat
         switch (event.getName()) {
             case "status" -> {
                 List<Server> servers;
