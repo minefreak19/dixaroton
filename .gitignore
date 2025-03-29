@@ -43,3 +43,4 @@ bin/
 
 # Try not to leak API Keys
 .idea/runConfigurations
+.env
