@@ -19,7 +19,7 @@ public class SlashCommandListener extends ListenerAdapter {
             case "status" -> {
                 List<Server> servers;
                 try {
-                    servers = Main.getExarotonClient().getServers().join();
+                    servers = Dixaroton.getExarotonClient().getServers().join();
                 } catch (IOException e) {
                     event.reply("Sorry, an error occurred while accessing Exaroton status: ```" + e.getMessage() + "```")
                             .setEphemeral(true)

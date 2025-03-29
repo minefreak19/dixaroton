@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import java.util.EnumSet;
 
-public class Main {
+public class Dixaroton {
     private static ExarotonClient exarotonClient;
 
         public static void main(String[] args) {
