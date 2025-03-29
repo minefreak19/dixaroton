@@ -11,16 +11,16 @@ import java.util.EnumSet;
 public class Dixaroton {
     private static ExarotonClient exarotonClient;
 
-        public static void main(String[] args) {
-            String discordApiToken = System.getenv("DISCORD_API_TOKEN");
-            String exarotonApiKey = System.getenv("EXAROTON_API_KEY");
+    public static void main(String[] args) {
+        String discordApiToken = System.getenv("DISCORD_API_TOKEN");
+        String exarotonApiKey = System.getenv("EXAROTON_API_KEY");
 
-            exarotonClient = new ExarotonClient(exarotonApiKey);
+        exarotonClient = new ExarotonClient(exarotonApiKey);
 
-            JDA jda = JDABuilder.createLight(discordApiToken, EnumSet.of(GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT))
-                    .addEventListeners(new SlashCommandListener())
-                .addEventListeners(new MessageReceiveListener())
-                .build();
+        JDA jda = JDABuilder.createLight(discordApiToken, EnumSet.of(GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT))
+            .addEventListeners(new SlashCommandListener())
+            .addEventListeners(new MessageReceiveListener())
+            .build();
 
         jda.updateCommands()
                 .addCommands(
