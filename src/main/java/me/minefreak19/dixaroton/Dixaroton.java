@@ -2,7 +2,6 @@ package me.minefreak19.dixaroton;
 
 import com.exaroton.api.ExarotonClient;
 import com.exaroton.api.server.Server;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -13,10 +12,8 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalField;
 import java.util.EnumSet;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
 // TODO: Add a README
 public class Dixaroton {
@@ -82,7 +79,7 @@ public class Dixaroton {
 
             // TODO: Find a way to also report player join/leave messages to Discord
             // TODO: Ping someone in minecraft when they're mentioned by MC username on Discord
-            // TODO: Improve emoji/embed/image dispay (e.g. say <image> if a message contains an image)
+            // TODO: Improve emoji/embed/image display (e.g. say <image> if a message contains an image)
             // This occurs at the beginning of all chat messages
             if (!line.startsWith("[Server thread/INFO]: [Not Secure]")) {
                 System.out.printf("Ignoring non-chat line `%s`\n", line);
