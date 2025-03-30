@@ -43,6 +43,7 @@ public class SlashCommandListener extends ListenerAdapter {
                         content.append(String.format(" (%d/%d)", server.getPlayerInfo().getCount(), server.getPlayerInfo().getMax()));
                         System.out.println(server.getPlayerInfo().getList());
                         for (String name : server.getPlayerInfo().getList()) {
+                            // TODO: Make this look better using embed fields for indenting
                             content.append("\n\t").append(name);
                         }
                     }
