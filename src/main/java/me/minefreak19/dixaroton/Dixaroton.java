@@ -68,6 +68,7 @@ public class Dixaroton {
                     // TODO: Panicking here might not be a good idea
                     throw new RuntimeException(String.format("Malformed console output line (expected '>' before message): `%s`\n", line));
                 }
+                // TODO: Good idea to escape this (and the username) for Discord markdown
                 message = line.substring(i + 2);
             }
 
