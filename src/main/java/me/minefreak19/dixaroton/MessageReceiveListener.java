@@ -37,6 +37,8 @@ public class MessageReceiveListener extends ListenerAdapter {
     }
 
     private static String minecraftSanitize(String s) {
-        return s.replace("§", "");
+        return s.replace("§", "")
+                .replace("\\","\\\\")
+                .replace("\"", "\\\"");
     }
 }
