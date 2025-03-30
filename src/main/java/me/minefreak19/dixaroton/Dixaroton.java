@@ -10,8 +10,13 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalField;
 import java.util.EnumSet;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 // TODO: Add a README
 public class Dixaroton {
@@ -22,6 +27,8 @@ public class Dixaroton {
     public static void main(String[] args) {
         String discordApiToken = System.getenv("DISCORD_API_TOKEN");
         String exarotonApiKey = System.getenv("EXAROTON_API_KEY");
+
+        final var dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.of("UTC"));
 
         exarotonClient = new ExarotonClient(exarotonApiKey);
 
@@ -46,14 +53,38 @@ public class Dixaroton {
         }
 
         // TODO: Doing it this way results in exaroton resending the entire chat history if the bot crashes or restarts; there may be a better way which ensures messages don't get duplicated on Discord
+        System.out.println("Adding console subscriber...");
         server.addConsoleSubscriber(line -> {
-            if (line.length() < 11) return;
-            // Exclude the timestamp
-            line = line.substring(11);
+            System.out.println("Console subscriber called.");
+            // This probably shouldn't happen but just in case
+            if (line.length() < 22) {
+                System.out.printf("Ignoring short line `%s`\n", line);
+                return;
+            }
+
+            // We don't want the space here
+            String timestamp = line.substring(0, 21);
+            if (!timestamp.matches("\\[\\d\\d\\d\\d-\\d\\d-\\d\\d [0-2][0-9]:[0-5][0-9]:[0-6][0-9]]")) {
+                System.out.printf("No regex match for `%s`\n", timestamp);
+                return;
+            }
+            Instant cutoff = Instant.now().minusSeconds(2);
+            System.out.printf("Trying to parse lineTime: `%s`\n", timestamp.substring(1, 20));
+            Instant lineTime = Instant.from(dateTimeFormatter.parse(timestamp.substring(1, 20)));
+            System.out.printf("Cutoff: %s\nlineTime: %s\n", cutoff, lineTime);
+
+            if (lineTime.isBefore(cutoff)) {
+                System.out.println("Ignoring (too old)...");
+                return;
+            }
+
+            // Exclude the datetime info
+            line = line.substring(22);
 
             // TODO: Find a way to also report player join/leave messages to Discord
             // This occurs at the beginning of all chat messages
             if (!line.startsWith("[Server thread/INFO]: [Not Secure]")) {
+                System.out.printf("Ignoring non-chat line `%s`\n", line);
                 return;
             }
 
