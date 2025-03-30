@@ -52,7 +52,6 @@ public class Dixaroton {
             return;
         }
 
-        // TODO: Doing it this way results in exaroton resending the entire chat history if the bot crashes or restarts; there may be a better way which ensures messages don't get duplicated on Discord
         System.out.println("Adding console subscriber...");
         server.addConsoleSubscriber(line -> {
             System.out.println("Console subscriber called.");

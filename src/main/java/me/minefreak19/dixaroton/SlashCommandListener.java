@@ -50,6 +50,7 @@ public class SlashCommandListener extends ListenerAdapter {
                 event.replyEmbeds(new EmbedBuilder()
                                 .setDescription(content.toString().trim())
                                 .build())
+                        .setEphemeral(true)
                         .queue();
             }
         }
