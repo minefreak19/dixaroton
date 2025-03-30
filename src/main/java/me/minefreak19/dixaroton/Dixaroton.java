@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 // TODO: Add a README
 public class Dixaroton {
     private static ExarotonClient exarotonClient;
-    public static final long DISCORD_MC_CHANNEL_ID = 1355668810119512214L;
+    public static final long DISCORD_MC_CHANNEL_ID = 1355846009581863033L;
     public static final long DISCORD_SELF_ID = 1355614585792626932L;
 
     public static void main(String[] args) {
