@@ -50,6 +50,7 @@ public class Dixaroton {
         }
 
         System.out.println("Adding console subscriber...");
+        // TODO: Either combine all the listeners into lambdas in this file or move this to a separate file for consistency
         server.addConsoleSubscriber(line -> {
             System.out.println("Console subscriber called.");
             // This probably shouldn't happen but just in case
