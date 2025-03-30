@@ -83,7 +83,6 @@ public class Dixaroton {
             // TODO: Find a way to also report player join/leave messages to Discord
             // TODO: Ping someone in minecraft when they're mentioned by MC username on Discord
             // TODO: Improve emoji/embed/image dispay (e.g. say <image> if a message contains an image)
-            // TODO: Bot can't handle "/say" messages from the server console
             // This occurs at the beginning of all chat messages
             if (!line.startsWith("[Server thread/INFO]: [Not Secure]")) {
                 System.out.printf("Ignoring non-chat line `%s`\n", line);
@@ -94,8 +93,14 @@ public class Dixaroton {
             line = line.substring(36);
             String playerName, message;
             {
-               int i = line.indexOf('>');
-               playerName = line.substring(0, i);
+                int i; // line.startsWith("Server]") ? 6 : line.indexOf('>');
+                for (i = 0; i < line.length(); i++) {
+                    char c = line.charAt(i);
+                    if (c == '>' || c == ']') break;
+                }
+
+                // i points at the ending > or ], so the substring will exclude this character
+                playerName = line.substring(0, i);
 
                 if (i + 2 > line.length()) {
                     // TODO: Panicking here might not be a good idea
