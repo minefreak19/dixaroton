@@ -105,11 +105,9 @@ public class Dixaroton {
                 message = line.substring(i + 2);
             }
 
+            String content = String.format("**<%s>** %s", playerName, message);
             Objects.requireNonNull(jda.getChannelById(TextChannel.class, DISCORD_MC_CHANNEL_ID))
-                    .sendMessageEmbeds(new EmbedBuilder()
-                            .setTitle(playerName)
-                            .setDescription(message)
-                            .build())
+                    .sendMessage(content)
                     .queue();
         });
     }
