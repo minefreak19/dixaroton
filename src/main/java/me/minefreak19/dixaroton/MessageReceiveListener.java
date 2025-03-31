@@ -1,6 +1,7 @@
 package me.minefreak19.dixaroton;
 
 import com.exaroton.api.server.Server;
+import com.exaroton.api.server.ServerStatus;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -26,6 +27,8 @@ public class MessageReceiveListener extends ListenerAdapter {
         }
 
         for (var server : servers) {
+            if (!server.getStatus().equals(ServerStatus.ONLINE)) continue;
+
             try {
                 String content = minecraftSanitize(event.getMessage().getContentDisplay());
                 server.executeCommand(String.format("tellraw @a {\"text\":\"§r[§9§lDiscord§r] <%s> %s\"}", event.getAuthor().getEffectiveName(), content)).join();
